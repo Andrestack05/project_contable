@@ -1,4 +1,4 @@
-// ✅ Script corregido para reportes diario, semanal y mensual
+// ✅ Script corregido con reporte semanal en tabla y total del día bien calculado (sin PDF)
 
 document.addEventListener("DOMContentLoaded", () => {
   const cantidadInput = document.getElementById("cantidad");
@@ -99,16 +99,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("report-day-btn").addEventListener("click", () => {
     const ventasGuardadas = JSON.parse(localStorage.getItem("sales")) || [];
+
+    // ✅ Obtener fecha local correctamente sin usar UTC
     const hoy = new Date();
-    const fechaHoy = hoy.toISOString().split("T")[0];
+    const fechaLocal = hoy.toISOString().split("T")[0];
+    const offset = hoy.getTimezoneOffset() * 60000;
+    const fechaHoy = new Date(hoy.getTime() - offset).toISOString().split("T")[0];
 
     const ventasDia = ventasGuardadas.filter((venta) => venta.fecha === fechaHoy);
     if (ventasDia.length === 0) return alert("No hay ventas para el día de hoy.");
 
     const totalDia = ventasDia.reduce((sum, v) => sum + v.total, 0);
-    let tablaHTML = generarTablaBonita(ventasDia);
-    tablaHTML += `<p style='font-weight:bold'>Total del Día: $${totalDia.toFixed(0)}</p>`;
-    mostrarReporte(tablaHTML);
+    // mostrarReporte(`<p style='font-weight:bold'>Ventas del Día (${fechaHoy}): $${totalDia.toFixed(0)}</p>`);
+    const tablaBonita = `
+  <table style="margin-top: 1rem; width: 300px; border-collapse: collapse; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; font-family: sans-serif;">
+    <thead style="background-color: #cceeff;">
+      <tr>
+        <th colspan="2" style="padding: 10px; text-align: center; font-size: 16px;">Ventas del Día</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 10px; border-top: 1px solid #ccc;">Fecha</td>
+        <td style="padding: 10px; border-top: 1px solid #ccc;">${fechaHoy}</td>
+      </tr>
+      <tr style="background-color: #f7faff;">
+        <td style="padding: 10px; border-top: 1px solid #ccc;">Total</td>
+        <td style="padding: 10px; border-top: 1px solid #ccc; font-weight: bold;">$${totalDia.toFixed(0)}</td>
+      </tr>
+    </tbody>
+  </table>`;
+mostrarReporte(tablaBonita);
   });
 
   document.getElementById("report-week-btn").addEventListener("click", () => {
@@ -120,15 +141,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const ventasSemana = ventas.filter((v) => new Date(v.fecha) >= lunes);
     if (ventasSemana.length === 0) return alert("No hay ventas esta semana.");
 
-    const doc = new jsPDF();
-    doc.text("Reporte Semanal de Ventas", 10, 10);
-    let y = 20;
-    doc.setFontSize(10);
-    ventasSemana.forEach((venta) => {
-      doc.text(`${venta.fecha} | ${venta.producto} | ${venta.cantidad} | $${venta.precio.toFixed(0)} | $${venta.total.toFixed(0)}`, 10, y);
-      y += 10;
-    });
-    doc.save("reporte_semanal.pdf");
+    const totalSemana = ventasSemana.reduce((sum, v) => sum + v.total, 0);
+    let tablaHTML = generarTablaBonita(ventasSemana);
+    tablaHTML += `<p style='font-weight:bold'>Total de la Semana: $${totalSemana.toFixed(0)}</p>`;
+    mostrarReporte(tablaHTML);
   });
 
   document.getElementById("report-month-btn").addEventListener("click", () => {
@@ -169,12 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function mostrarReporte(html) {
+    const reportContainer = document.getElementById("report-container");
     const div = document.createElement("div");
     div.innerHTML = html;
-    div.style.margin = "2rem";
-    document.body.appendChild(div);
-  }
+    div.style.margin = "2rem"; // Controlar el espacio con margen
+    reportContainer.appendChild(div);
+}
 
   mostrarVentas();
 });
+
 

@@ -1,0 +1,111 @@
+/* buys.css */
+
+.buys {
+    background-color: #f9fbfd;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .buys__title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .buys__form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .buys__form input,
+  .buys__form button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccd6dd;
+    font-size: 1rem;
+  }
+  
+  .buys__form button {
+    background-color: #6ab0de;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buys__form button:hover {
+    background-color: #4a90e2;
+  }
+  
+  .buys__message {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  .buys__message--exito {
+    color: #27ae60;
+  }
+  
+  .buys__table-container {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+  
+  .buys__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+  }
+  
+  .buys__table th,
+  .buys__table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  .buys__table th {
+    background-color: #dceefb;
+    font-weight: bold;
+  }
+  
+  .buys__table tr:nth-child(even) {
+    background-color: #f5faff;
+  }
+  
+  .buys__filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  
+  .buys__report-btn {
+    padding: 0.5rem 1rem;
+    background-color: #82c91e;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buys__report-btn:hover {
+    background-color: #66a80f;
+  }
+  
+  .buys__delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .buys__delete-btn img {
+    width: 20px;
+    height: 20px;
+  }
+  

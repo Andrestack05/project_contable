@@ -5,5 +5,7 @@
 @import url(./blocks/intro.css);
 @import url(./blocks/form__sale.css);
 @import url(./blocks/history.css);
+@import url(./blocks/report.css);
+@import url(./blocks/buys.css);
 
 @import url(./blocks/footer.css);
