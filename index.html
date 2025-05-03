@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contabilidad Resto</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <div class="page">
+  <header class="header">
+    <img src="./images/logo_restaurant.svg" alt="Logo Restaurante" class="header__logo" />
+    <h1 class="header__title">Contabilidad Restaurante</h1>
+  </header>
+
+  <nav class="nav__tools">
+    <ul class="nav__tools_items">
+      <li><a href="#" class="nav__tools_item">Inicio</a></li>
+      <li><a href="#" class="nav__tools_item">Ventas</a></li>
+      <li><a href="#" class="nav__tools_item">Compras</a></li>
+      <li><a href="#" class="nav__tools_item">Reportes</a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+
+    <section class="intro">
+      <h2 class="intro__title">Bienvenido</h2>
+      <p class="intro__description">Controla tus ventas, compras y reportes contables de forma sencilla.</p>
+      <img src="./images/intro__image.png" alt="Fondo Cocina" class="intro__image" />
+    </section>
+
+    <section class="sales">
+        <h2 class="sales__title">Registrar Venta</h2>
+        <form class="sales__form" id="form-sale">
+          <div class="sales__form-group">
+            <label class="sales__label" for="fecha">Fecha:</label>
+            <input class="sales__input" type="date" id="fecha" name="fecha" required />
+          </div>
+      
+          <div class="sales__form-group">
+            <label class="sales__label" for="producto">Producto:</label>
+            <input class="sales__input" type="text" id="producto" name="producto" required />
+          </div>
+      
+          <div class="sales__form-group">
+            <label class="sales__label" for="cantidad">Cantidad:</label>
+            <input class="sales__input" type="number" id="cantidad" name="cantidad" min="1" required />
+          </div>
+      
+          <div class="sales__form-group">
+            <label class="sales__label" for="precio">Precio Unitario ($):</label>
+            <input class="sales__input" type="number" id="precio" name="precio" step="0.01" required />
+          </div>
+      
+          <div class="sales__form-group">
+            <label class="sales__label" for="total">Total ($):</label>
+            <input class="sales__input" type="number" id="total" name="total" step="0.01" required />
+          </div>
+      
+          <button class="sales__button" type="submit">Registrar Venta</button>
+          <div class="sales__message" id="message-sale"></div>
+        </form>
+      </section>
+
+      <section class="history">
+        <h2 class="history__title">Historial de Ventas</h2>
+
+        <div class="history__filter">
+            <h3 class="history__filter-title">Filtrar por fecha</h3>
+            <input type="date" id="filter-date" class="history__filter-input" />
+            <button id="filter-btn" class="history__filter-btn">Filtrar</button>
+          </div>
+
+          <div class="history__report">
+            <button id="report-day-btn" class="history__report-btn">Total del Día</button>
+            <button id="report-week-btn" class="history__report-btn">Reporte Semanal</button>
+            <button id="report-month-btn" class="history__report-btn">Reporte Mensual</button>
+          </div>
+
+        <table class="history__table" id="sales-table">
+          <thead class="history__thead">
+            <tr class="history__row">
+              <th class="history__header">Fecha</th>
+              <th class="history__header">Producto</th>
+              <th class="history__header">Cantidad</th>
+              <th class="history__header">Precio Unitario</th>
+              <th class="history__header">Total</th>
+            </tr>
+          </thead>
+          <tbody class="history__body">
+            <!-- Filas de ventas generadas dinámicamente -->
+          </tbody>
+        </table>
+      </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">© 2025 Restaurante App - Proyecto UPTC</p>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</body>
+</html>

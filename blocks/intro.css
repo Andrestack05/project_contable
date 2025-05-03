@@ -1,0 +1,22 @@
+.intro {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+  
+  .intro__image{
+    max-width: 100%;
+    margin-top: 1rem;
+    border-radius: 10px;
+  }
+
+  .intro__title{
+    font-size: 2rem;
+    line-height: 1.5;
+  }
+
+  .intro__description{
+    font-size: 1.2rem;
+  }
